@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">LessonTap</a>
+              <a class="navbar-brand" href="/">LessonTap</a>
             </div>
           </div><!-- /.container-fluid -->
         </nav>
@@ -35,25 +35,26 @@
       <!--Panel-->
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h3 class="panel-title">Rick Astley Quiz</h3>
+        <h3 class="panel-title">Cooking The Perfect Steak : Lesson 1</h3>
         </div>
         <div class="panel-body">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/AmC9SmCBUj4" frameborder="0" allowfullscreen></iframe>
         </div><!--?rel=0;&autoplay=1-->
       </div>
 
       <!--Checkboxes-->
       <form action="site">
-        <h1>Rick Astley would never?</h1>
-        <input type="checkbox" name="chk" value="0"> Give you up<br><!--name needs to sent to DB-->
-        <input type="checkbox" name="chk" value="1"> Let you down<br>
-        <input type="checkbox" name="chk" value="2"> Run around<br>
-        <input type="checkbox" name="chk" value="3"> Desert you<br>
-        <input type="checkbox" name="chk" value="4"> Make you cry<br>
-        <input type="checkbox" name="chk" value="5"> Say goodbye<br>
-        <input type="checkbox" name="chk" value="6"> Tell a lie<br>
-        <input type="checkbox" name="chk" value="7"> Hurt you<br>
-        <input type="checkbox" name="chk" value="8"> All of the above<br>
+        <h2>Choose the step that does not belong?</h2>
+        <input type="checkbox" name="chk" value="0"> Add lots of salt & pepper<br><!--name needs to sent to DB-->
+        <input type="checkbox" name="chk" value="1"> Remove from fridge 20 minutes before you cook them<br>
+        <input type="checkbox" name="chk" value="2"> Add olive oil to a hot pan <br>
+        <input type="checkbox" name="chk" value="3"> Lay steaks away from you in pan<br>
+        <input type="checkbox" name="chk" value="4"> Sear steak all around including the sides<br>
+        <input type="checkbox" name="chk" value="5"> Tilt pan to sear steak better<br>
+        <input type="checkbox" name="chk" value="6"> Add crushed garlic<br>
+        <input type="checkbox" name="chk" value="7"> Add fresh thyme, more olive oil, and butter to baste<br>
+        <input type="checkbox" name="chk" value="8"> Add one bay leaf<br>
+        <input type="checkbox" name="chk" value="9"> Cook until done, pull out, and let rest<br>
         <input type="submit" value="Submit" name='chksub'>
       </form>
 

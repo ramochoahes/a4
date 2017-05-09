@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body>
+
     <header class="navbar-inverse"> <!--this mod gives you the full dscreen black navbar-->
       <div class="container">
         <nav>
@@ -22,40 +23,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">LessonTap</a>
+              <a class="navbar-brand" href="/">LessonTap</a>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="makeClass">Teach a Class</a></li>
+                <li><a href="site">Free Online Classes</a></li>
+              </ul>
+
             </div>
           </div><!-- /.container-fluid -->
         </nav>
       </div>
     </header>
 
-      <!--Panel-->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-          <h3 class="panel-title">Welcome!</h3>
-          </div>
-          <div class="panel-body">
-            <img src="/images/front.jpg" class="img-responsive" alt="Responsive image">
-          </div>
-        </div>
-        <br>
-        <h1>Sign In</h1>
-
-        <section>
         @yield('validation')
-        </section>
+        @yield('makeClass')
 
-      <!--Validation Message-->
-      @if(count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      @endif
-      <br>
-      <br>
-      <br>
+
     <!-- JavaScript library for Bootstrap use goes here before it -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->

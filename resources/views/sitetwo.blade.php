@@ -25,7 +25,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">LessonTap</a>
+                <a class="navbar-brand" href="/">LessonTap</a>
               </div>
           </div><!-- /.container-fluid -->
         </nav>
@@ -35,19 +35,19 @@
       <!--Panel-->
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h3 class="panel-title">The Proclaimers Quiz</h3>
+        <h3 class="panel-title">Scrambled Eggs : Lesson 2</h3>
         </div>
         <div class="panel-body">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/tbNlMtqrYS0?rel=0;&autoplay=1" frameborder="0" allowfullscreen></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/PUP7U5vTMM0" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
       <!--Checkboxes-->
       <form action="sitetwo">
-        <h3>To fall down at your door, The Proclaimers?</h3>
-        <input type="checkbox" name="chk" value="0"> Would walk 500 miles<br><!--name needed to send to DB-->
-        <input type="checkbox" name="chk" value="1"> In addition to walking 500 miles, would walk 500 more<br>
-        <input type="checkbox" name="chk" value="2"> Would quit after 999 miles<br>
-        <input type="checkbox" name="chk" value="3"> Would walk more miles than 500 and 500 more<br>
+        <h3>What is the most important thing in cooking a scrambled egg? </h3>
+        <input type="checkbox" name="chk" value="0"> Adding lots of olive oil first<br><!--name needed to send to DB-->
+        <input type="checkbox" name="chk" value="1"> Stopping in it from over cooking<br>
+        <input type="checkbox" name="chk" value="2"> Adding salt, pepper, mushrooms, and vine tomatoes<br>
+        <input type="checkbox" name="chk" value="3"> Using a fresh sourdough bread<br><br>
         <input type="submit" value="Submit" name='chksub2'>
       </form>
 
