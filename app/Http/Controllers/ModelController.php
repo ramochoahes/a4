@@ -14,8 +14,9 @@ use App\Course; # makes Class model accessible to controller functions below
 class ModelController extends Controller {
 
 
-    public function courseFunction() {
+    public function courseFunction(Request $request) {
 
+        /*
         # Instantiate a new Course Model object from our Model file
         $course = new Course();
 
@@ -28,43 +29,51 @@ class ModelController extends Controller {
         # Invoke the Eloquent `save` method to generate a new row in the
         # `books` table, with the above data
         #$course->save();
+        */
 
-        dump($course);
+
+
+        $allData = Course::all();
+        $reusedData = $allData->sortByDesc('username')->take(3);
+        $username = $request->input('username');
+$course = Course::all();
+
+        if ($request!=null) {
+          echo "hello";
+          $course = new Course();
+
+          $course->username = $request->username;
+          $course->description = $request->description;
+          $course->category = $request->category;
+          $course->other = 'https://www.w3schools.com/css/trolltunga.jpg';
+          #$course->save();
+#dump($course);
+
+          return view('makeClass')->with([
+
+            'reusedData'=>$reusedData,
+            'allData'=>$allData,
+
+            ])->withUsername($username)->withCourse($course);
+
+
+        }
+
+        else{
+          echo "hi again";
+          return view('makeClass')->with([
+
+            'reusedData'=>$reusedData,
+            'allData'=>$allData,
+
+            ])->withUsername($username)->withCourse($course);
+        }
+
+
+
+
 
     }
-
-    public function courseReturn(Request $request) {
-
-      $allData = Course::all();
-      $reusedData = $allData->sortByDesc('username')->take(3);
-
-      return view('makeClass')->with([
-
-        'reusedData'=>$reusedData,
-        'allData'=>$allData,
-
-      ]);
-
-
-    }
-    public function requestFunction(Request $request) {
-
-      $username = $request->input('username');
-
-      dump($request->all());
-
-      $course = new Course();
-
-      $course->username = $request->username;
-      $course->description = $request->description;
-      $course->category = $request->category;
-      $course->other = 'https://www.w3schools.com/css/trolltunga.jpg';
-      $course->save();
-
-
-    }
-
-
 
 
 
@@ -86,12 +95,9 @@ class ModelController extends Controller {
           }# collection object returned
           */
     /*
-          @foreach ($test as $tests)
-
-              <h2>{{$tests['category']}}</h2>
-              {{$tests['description']}}
-
-          @endforeach
+    @foreach ($username as $usernameTest)
+      <h2>  {{$usernameTest['username']}} </h2>
+    @endforeach
     */
 
 

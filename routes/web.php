@@ -15,5 +15,5 @@ Route::get('/', 'ValController@getVal');
 Route::get('validation', 'ValController@getVal');
 Route::get('site', 'ValController@returnSite');
 Route::get('sitetwo', 'ValController@returnSiteTwo');
-Route::get('makeClass', 'ModelController@courseReturn');
-Route::get('makeClass', 'ModelController@requestFunction');
+Route::get('makeClass', 'ModelController@courseFunction');
+#Route::get('modelController', 'ModelController@courseFunction');

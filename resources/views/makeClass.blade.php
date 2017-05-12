@@ -42,9 +42,14 @@
     </div>
 </div>
 
+
+
+{{dump($username)}}
+{{dump($course)}}
+
 @foreach ($allData as $data)
 
-    <h2>{{$data['username']}}</h2>
+    <h2>{{$data['other']}}</h2>
     {{$data['id']}}
     <img src='{{$data['other']}}'>
 

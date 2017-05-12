@@ -36,6 +36,8 @@
       </div>
     </header>
 
+
+
         @yield('validation')
         @yield('makeClass')
 
