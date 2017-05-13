@@ -38,7 +38,7 @@ class ModelController extends Controller {
         $username = $request->input('username');
 $course = Course::all();
 
-        if ($request!=null) {
+        if ($_GET!=null) {
           echo "hello";
           $course = new Course();
 
