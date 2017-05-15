@@ -10,97 +10,189 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 use App\Course; # makes Class model accessible to controller functions below
+use Session;# allows sessions
+use App\Tag;
+
+
 
 class ModelController extends Controller {
 
 
-    public function courseFunction(Request $request) {
-
-        /*
-        # Instantiate a new Course Model object from our Model file
-        $course = new Course();
-
-        # Set the parameters
-        # Note how each parameter corresponds to a field in the table]
-        $course->username = 'SomeKindaAlien';
-        $course->description = 'Description of class';
-        $course->category = 'Some category';
-        $course->other = 'https://www.w3schools.com/css/trolltunga.jpg';
-        # Invoke the Eloquent `save` method to generate a new row in the
-        # `books` table, with the above data
-        #$course->save();
-        */
-
-
+    public function createFunction(Request $request) {
+# SETS INFO TO VIEW MAKECLASS
 
         $allData = Course::all();
-        $reusedData = $allData->sortByDesc('username')->take(3);
+        $reusedData = $allData->take(1);
         $username = $request->input('username');
-$course = Course::all();
+        $description = $request->input('description');
+        $category = $request->input('category');
+        $other = $request->input('other');
 
+dump($request->username);
+dump($_GET);
+# SETS INPUT TO DB
         if ($_GET!=null) {
-          echo "hello";
-          $course = new Course();
 
+          # Custom error message
+         $messages = [
+             'author_id.not_in' => 'Author not selected.',
+         ];
+         $this->validate($request, [
+             'username' => 'required|min:3',
+             'description' => 'required',
+             'category' => 'required',
+         ], $messages);
+
+          $course = new Course(); #not a collection
+          #$course = Course::all(); # get collection
           $course->username = $request->username;
           $course->description = $request->description;
           $course->category = $request->category;
-          $course->other = 'https://www.w3schools.com/css/trolltunga.jpg';
-          #$course->save();
-#dump($course);
+          $course->other = 'other';
+          $course->save();#persists to DB (CREATE part of CRUD)
 
-          return view('makeClass')->with([
+
+
+          # Session used to have memory between page loads
+          Session::flash('message', 'Course was added.');
+echo "Create: if not null";
+          return view('makeClass');
+          /*->with([
 
             'reusedData'=>$reusedData,
             'allData'=>$allData,
 
-            ])->withUsername($username)->withCourse($course);
-
+            ])->withUsername($username)->withCourse($course)->withCategory($category);*/
 
         }
 
         else{
-          echo "hi again";
-          return view('makeClass')->with([
+echo "Hello from else : No _GET data";
+          $course = new Course(); #not a collection
+          return view('makeClass');
+          /*->with([
 
             'reusedData'=>$reusedData,
             'allData'=>$allData,
 
-            ])->withUsername($username)->withCourse($course);
+            ])->withUsername($username)->withCourse($course)->withCategory($category);*/
         }
 
 
+# EDIT
+    }
+    # GET
+    public function editFunction(Request $request) {
+#$page = $request->input('username');
+      $allData = Course::all();
+      $page = Course::where('username', "Broly")->first();# We need this here to work
+
+#dump($$request->searchId);
+      if(is_null($page)){
+
+        Session::flash('message', "User not found.");
+        return; # nowhere to return to
+
+      }
+
+echo "editFunction";
+      return View('editClass')
+      ->withPage($page);
+    }
+
+# SAVE EDIT
+    # POST (this will save our data to DB)
+    #request passed so we can get data from the form
+    public function SaveEditFunction(Request $request) {
 
 
+      $this->validate($request, [
+          'username' => 'required|min:3',
+          'description' => 'required',
+          'category' => 'required',
+      ]);
 
+      # instead of instatiating a new book like in the create, here we fetched it
+      $page = Course::where('username', "Broly")->first();
+      #$test = $request->id2;
+dump($request->searchId);
+
+      $page->username = $request->username;
+      $page->description = $request->description;
+      $page->category = $request->category;
+      $page->other = $request->other;
+      $page->save();#persists to DB (CREATE part of CRUD)
+echo "saveEditFunction";
+      Session::flash('message', 'Changes saved.');
+      return redirect('editClass');
+
+    }
+
+    /**
+    * GET FOR READING
+    * Page to confirm deletion. responds to a GET request
+    */
+
+    public function confirmDelete(Request $request) {
+        # Get the book task if they want to delete it
+        #$page = Course::where('username', $request->username )->first();
+        $page = Course::where('username', "SomeKindaAlien")->first();
+dump($request->searchId);
+        if(!$page) {
+            Session::flash('message', 'Username not found.');
+            return redirect('deleteClass');
+        }
+echo "confirmDelete";
+        return view('deleteClass')->with('page', $page);
+    }
+
+    /**
+    * POST FOR CREATING AND UPLOADING
+    * Actually delete the book from form when confirmed in the above function
+    */
+
+
+    public function delete(Request $request) {
+        # Get the book to be deleted.
+        $page = Course::where('username', $request->searchId)->first();
+dump($request->searchId);
+        if(!$page) {
+            Session::flash('message', 'Deletion failed; user not found.');
+            return redirect('deleteSearch');
+        }
+
+        $page->delete();
+echo "delete";
+        # Finish
+        Session::flash('message', 'Class was deleted.');
+        return redirect('deleteClass');
     }
 
 
 
-    #return redirect ('makeClass');
-
-          /*
-          $test = Course::all(); # returns the collection
-          $test = Course::orderBy('created_at', 'decending')->limit(1)->get();
+    public function searchDelete(Request $request) {
 
 
-          echo $test; # JSON string object returned
+echo "searchDelete";
+dump($request->searchId);
 
-          foreach ($test as $tests){
-            dump($tests['username']);
-          } #array returned without needing to convert it into one
-
-          foreach ($test as $tests){
-            dump($tests->username);
-          }# collection object returned
-          */
-    /*
-    @foreach ($username as $usernameTest)
-      <h2>  {{$usernameTest['username']}} </h2>
-    @endforeach
-    */
+      if($_GET!=null){
+        $page = Course::where('username', $request->searchId)->first();
+        return view('deleteClass')->with('page', $page);
+      }
+      else {
+        $page = Course::where('username', "SomeKindaAlien")->first();
+        return view('deleteSearch')->with('page', $page);
 
 
+      }
+
+
+
+    }
+#{{$page->username}}
+#placeholder='{{$username}}' value='{{$username}}'
+# {{$category}}
 
 
 }

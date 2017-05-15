@@ -13,7 +13,13 @@
 
 Route::get('/', 'ValController@getVal');
 Route::get('validation', 'ValController@getVal');
+
 Route::get('site', 'ValController@returnSite');
 Route::get('sitetwo', 'ValController@returnSiteTwo');
-Route::get('makeClass', 'ModelController@courseFunction');
-#Route::get('modelController', 'ModelController@courseFunction');
+Route::get('makeClass', 'ModelController@createFunction');
+Route::get('editClass', 'ModelController@editFunction');
+Route::post('editClass', 'ModelController@saveEditFunction');
+Route::get('deleteClass', 'ModelController@confirmDelete');
+Route::post('deleteClass', 'ModelController@delete');
+
+Route::get('deleteSearch', 'ModelController@searchDelete');

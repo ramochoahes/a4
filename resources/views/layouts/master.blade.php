@@ -11,6 +11,10 @@
   </head>
   <body>
 
+@if(Session::get('message')!= null)
+      <div class="messgae">{{Session::get('message')}}</div>
+@endif
+
     <header class="navbar-inverse"> <!--this mod gives you the full dscreen black navbar-->
       <div class="container">
         <nav>
@@ -26,7 +30,9 @@
               <a class="navbar-brand" href="/">LessonTap</a>
 
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="makeClass">Teach a Class</a></li>
+                <li><a href="makeClass">Create a Class</a></li>
+                <li><a href="editClass">Edit Your Class</a></li>
+                <li><a href="deleteSearch">Delete Your Class</a></li>
                 <li><a href="site">Free Online Classes</a></li>
               </ul>
 
@@ -40,6 +46,9 @@
 
         @yield('validation')
         @yield('makeClass')
+        @yield('editClass')
+        @yield('delete')
+        @yield('deleteSearch')
 
 
     <!-- JavaScript library for Bootstrap use goes here before it -->
