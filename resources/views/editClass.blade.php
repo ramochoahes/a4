@@ -8,7 +8,7 @@
 
     {{csrf_field()}}
 
-    <input type='hidden' name='id2' value='{{$page->username}}'>
+    <input type='hidden' name='hidden' value='{{$page->username}}'>
 
     <h2>Edit Information</h2>
     <div class="panel-body">

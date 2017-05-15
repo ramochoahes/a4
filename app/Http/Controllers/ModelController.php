@@ -87,10 +87,10 @@ echo "Hello from else : No _GET data";
     public function editFunction(Request $request) {
 #$page = $request->input('username');
       $allData = Course::all();
-      $page = Course::where('username', "Broly")->first();# We need this here to work
-      #$page = Course::where('id3', $request->id3)->first();
+      #$page = Course::where('username', "Broly")->first();# We need this here to work
+      $page = Course::where('username', $request->username)->first();
 
-#dump($request->id3);
+dump($request->username);
       if(is_null($page)){
 
         Session::flash('message', "User not found.");
@@ -119,9 +119,9 @@ echo "editFunction";
 
       # instead of instatiating a new book like in the create, here we fetched it
       #$page = Course::where('username', "Broly")->first();
-$page = Course::where('id3', $request->id3)->first();
+$page = Course::where('username', $request->username)->first();
 #dump($request->searchId);
-dump($request->id3);
+dump($request->username);
 
 
       $page->username = $request->username;
@@ -140,7 +140,7 @@ echo "saveEditFunction";
     * GET FOR READING
     * Page to confirm deletion. responds to a GET request
     */
-/*
+
     public function confirmDelete(Request $request) {
         # Get the book task if they want to delete it
         $page = Course::where('username', $request->username )->first();
@@ -150,12 +150,12 @@ dump($request->searchId);
 
             Session::flash('message', 'Username not found.');
             #return redirect('deleteClass');
-            return "No Page Found";
+            return "No Page Found / User Deleted";
         }
 echo "confirmDelete";
         return view('deleteClass')->with('page', $page);
     }
-*/
+
 
     /**
     * POST FOR CREATING AND UPLOADING
@@ -192,7 +192,7 @@ dump($request->searchId);
         return view('deleteClass')->with('page', $page);
       }
       else {
-        $page = Course::where('username', "SomeKindaAlien")->first();
+        $page = Course::where('username', $request->searchId)->first();
         return view('deleteSearch')->with('page', $page);
 
 
