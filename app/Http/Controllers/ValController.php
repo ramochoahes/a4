@@ -19,7 +19,7 @@ class ValController extends Controller
       if ($_GET) {
 
         $validator = Validator::make($request->all(), [
-            	'username' => 'required',
+            	'id3' => 'required',
             	'password' => 'required',
                 ]);
         # if it fails return to the same page with the errors

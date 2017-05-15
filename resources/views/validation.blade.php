@@ -15,12 +15,12 @@
 
 <h1>Sign In</h1>
 <!--Validation Form-->
-<form class="form-inline" method='get' action="validation">
-<input type='hidden' name='id3' value='username'>
+<form class="form-inline" method='GET' action="validation">
+<input type='hidden' name='hidden' value='id3h'>
 
   <div class="form-group">
     <label class="sr-only" for="exampleInputEmail3">Email address</label>
-    <input type="email" name="username" class="form-control" id="username" placeholder="Email"> <!--name stores its ID in the _GET-->
+    <input type="email" name="id3" class="form-control" id="id3" placeholder="Email"> <!--name stores its ID in the _GET-->
   </div>
   <div class="form-group">
     <label class="sr-only" for="exampleInputPassword3">Password</label>

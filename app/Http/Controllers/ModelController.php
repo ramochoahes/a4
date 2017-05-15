@@ -56,43 +56,48 @@ dump($_GET);
           # Session used to have memory between page loads
           Session::flash('message', 'Course was added.');
 echo "Create: if not null";
-          return view('makeClass');
-          /*->with([
+          return view('makeClass')
+          # SENDS TO VIEW
+          ->with([
 
             'reusedData'=>$reusedData,
             'allData'=>$allData,
 
-            ])->withUsername($username)->withCourse($course)->withCategory($category);*/
+            ])->withUsername($username)->withCourse($course)->withCategory($category);
 
         }
 
         else{
 echo "Hello from else : No _GET data";
           $course = new Course(); #not a collection
-          return view('makeClass');
-          /*->with([
+          return view('makeClass')
+          # SENDS TO VIEW IF NO DATA
+          ->with([
 
             'reusedData'=>$reusedData,
             'allData'=>$allData,
 
-            ])->withUsername($username)->withCourse($course)->withCategory($category);*/
+            ])->withUsername($username)->withCourse($course)->withCategory($category);
         }
 
 
-# EDIT
+# FINDS EDIT
     }
     # GET
     public function editFunction(Request $request) {
 #$page = $request->input('username');
       $allData = Course::all();
       $page = Course::where('username', "Broly")->first();# We need this here to work
+      #$page = Course::where('id3', $request->id3)->first();
 
-#dump($$request->searchId);
+#dump($request->id3);
       if(is_null($page)){
 
         Session::flash('message', "User not found.");
-        return; # nowhere to return to
-
+        #dump($_GET['id3']);
+        #return "page is null"; # nowhere to return to
+        return View('editClass')
+        ->withPage($page);
       }
 
 echo "editFunction";
@@ -113,9 +118,11 @@ echo "editFunction";
       ]);
 
       # instead of instatiating a new book like in the create, here we fetched it
-      $page = Course::where('username', "Broly")->first();
-      #$test = $request->id2;
-dump($request->searchId);
+      #$page = Course::where('username', "Broly")->first();
+$page = Course::where('id3', $request->id3)->first();
+#dump($request->searchId);
+dump($request->id3);
+
 
       $page->username = $request->username;
       $page->description = $request->description;
@@ -128,48 +135,52 @@ echo "saveEditFunction";
 
     }
 
+# FINDS CLASS TO DELETE
     /**
     * GET FOR READING
     * Page to confirm deletion. responds to a GET request
     */
-
+/*
     public function confirmDelete(Request $request) {
         # Get the book task if they want to delete it
-        #$page = Course::where('username', $request->username )->first();
-        $page = Course::where('username', "SomeKindaAlien")->first();
+        $page = Course::where('username', $request->username )->first();
+        #$page = Course::where('username', "SomeKindaAlien")->first();
 dump($request->searchId);
         if(!$page) {
+
             Session::flash('message', 'Username not found.');
-            return redirect('deleteClass');
+            #return redirect('deleteClass');
+            return "No Page Found";
         }
 echo "confirmDelete";
         return view('deleteClass')->with('page', $page);
     }
+*/
 
     /**
     * POST FOR CREATING AND UPLOADING
     * Actually delete the book from form when confirmed in the above function
     */
 
-
+# ACTUAL DELETE
     public function delete(Request $request) {
-        # Get the book to be deleted.
+        # Get the user class to be deleted.
         $page = Course::where('username', $request->searchId)->first();
 dump($request->searchId);
         if(!$page) {
             Session::flash('message', 'Deletion failed; user not found.');
-            return redirect('deleteSearch');
+            return redirect('deleteSearch')->with('page', $page);
         }
 
         $page->delete();
 echo "delete";
         # Finish
         Session::flash('message', 'Class was deleted.');
-        return redirect('deleteClass');
+        return redirect('deleteClass')->with('page', $page);
     }
 
 
-
+# SEARCH USERNAME TO DELETE
     public function searchDelete(Request $request) {
 
 
