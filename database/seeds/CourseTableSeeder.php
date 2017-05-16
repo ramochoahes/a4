@@ -39,6 +39,7 @@ class CourseTableSeeder extends Seeder
             'category' => $course[0],
             'description' => $course[[1],
             #'username' => $course[[2], no longer needed either
+            'username_id' => 1,
             'other' => $course[3]
 
         ]);

@@ -34,7 +34,6 @@ class UsernamesTableSeeder extends Seeder
         Username::insert([
             'created_at' => $timestampForThisAuthor,
             'updated_at' => $timestampForThisAuthor,
-            'username_id' => 1,
             'first' => $username[0],
             'last' => $username[1],
             'username' => $username[2]
