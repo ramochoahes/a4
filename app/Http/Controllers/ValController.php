@@ -17,7 +17,8 @@ class ValController extends Controller
     public function getVal(Request $request) {
 
       if ($_GET) {
-
+        $username= $request->username;
+        dump($username);
         $validator = Validator::make($request->all(), [
             	'username' => 'required',
             	'password' => 'required',

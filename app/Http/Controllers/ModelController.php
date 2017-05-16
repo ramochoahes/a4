@@ -19,7 +19,7 @@ class ModelController extends Controller {
 
 
     public function createFunction(Request $request) {
-# SETS INFO TO VIEW MAKECLASS
+      # SETS INFO TO VIEW MAKECLASS
 
         $allData = Course::all();
         $reusedData = $allData->take(1);
@@ -28,9 +28,7 @@ class ModelController extends Controller {
         $category = $request->input('category');
         $other = $request->input('other');
 
-dump($request->username);
-dump($_GET);
-# SETS INPUT TO DB
+        # SETS INPUT TO DB
         if ($_GET!=null) {
 
           # Custom error message
@@ -43,71 +41,71 @@ dump($_GET);
              'category' => 'required',
          ], $messages);
 
-          $course = new Course(); #not a collection
           #$course = Course::all(); # get collection
+          $course = new Course(); #not a collection
           $course->username = $request->username;
           $course->description = $request->description;
           $course->category = $request->category;
           $course->other = 'other';
           $course->save();#persists to DB (CREATE part of CRUD)
 
-
-
           # Session used to have memory between page loads
           Session::flash('message', 'Course was added.');
-echo "Create: if not null";
           return view('makeClass')
           # SENDS TO VIEW
           ->with([
-
             'reusedData'=>$reusedData,
             'allData'=>$allData,
 
-            ])->withUsername($username)->withCourse($course)->withCategory($category);
+            ])
+            ->withUsername($username)
+            ->withCourse($course)
+            ->withCategory($category);
 
         }
-
+        # NO DATA, CREATE NEW
         else{
-echo "Hello from else : No _GET data";
+
           $course = new Course(); #not a collection
           return view('makeClass')
+
           # SENDS TO VIEW IF NO DATA
           ->with([
-
             'reusedData'=>$reusedData,
             'allData'=>$allData,
 
-            ])->withUsername($username)->withCourse($course)->withCategory($category);
+            ])
+            ->withUsername($username)
+            ->withCourse($course)
+            ->withCategory($category);
         }
 
 
-# FINDS EDIT
-    }
-    # GET
-    public function editFunction(Request $request) {
-#$page = $request->input('username');
-      $allData = Course::all();
-      #$page = Course::where('username', "Broly")->first();# We need this here to work
-      $page = Course::where('username', $request->username)->first();
 
-dump($request->username);
+    }
+    # FINDS EDIT :
+    # GETs (gets data to edit)
+
+    public function editFunction(Request $request) {
+      #$page = $request->input('username');
+      #$allData = Course::all()->username;
+      $page = Course::all()->first();# We need this here to work
+      #$page = Course::where('username', $id)->first();
+
       if(is_null($page)){
 
         Session::flash('message', "User not found.");
-        #dump($_GET['id3']);
         #return "page is null"; # nowhere to return to
         return View('editClass')
         ->withPage($page);
       }
 
-echo "editFunction";
       return View('editClass')
       ->withPage($page);
     }
 
-# SAVE EDIT
-    # POST (this will save our data to DB)
-    #request passed so we can get data from the form
+    # SAVE EDIT
+    # POSTs (this will save our data to DB)
     public function SaveEditFunction(Request $request) {
 
 
@@ -117,18 +115,13 @@ echo "editFunction";
           'category' => 'required',
       ]);
 
-      # instead of instatiating a new book like in the create, here we fetched it
-      #$page = Course::where('username', "Broly")->first();
-$page = Course::where('username', $request->username)->first();
-#dump($request->searchId);
-dump($request->username);
-
-
+      $page = Course::where('username', $request->username)->first();
       $page->username = $request->username;
       $page->description = $request->description;
       $page->category = $request->category;
       $page->other = $request->other;
       $page->save();#persists to DB (CREATE part of CRUD)
+
 echo "saveEditFunction";
       Session::flash('message', 'Changes saved.');
       return redirect('editClass');
@@ -142,63 +135,58 @@ echo "saveEditFunction";
     */
 
     public function confirmDelete(Request $request) {
-        # Get the book task if they want to delete it
+        # Ask if they want to delete it
         $page = Course::where('username', $request->username )->first();
-        #$page = Course::where('username', "SomeKindaAlien")->first();
-dump($request->searchId);
+
         if(!$page) {
 
-            Session::flash('message', 'Username not found.');
-            #return redirect('deleteClass');
-            return "No Page Found / User Deleted";
+            Session::flash('message', 'Username deleted.');
+            return view('makeClass');
         }
+
 echo "confirmDelete";
         return view('deleteClass')->with('page', $page);
     }
-
 
     /**
     * POST FOR CREATING AND UPLOADING
     * Actually delete the book from form when confirmed in the above function
     */
 
-# ACTUAL DELETE
+    # ACTUAL DELETE
     public function delete(Request $request) {
         # Get the user class to be deleted.
         $page = Course::where('username', $request->searchId)->first();
-dump($request->searchId);
+
         if(!$page) {
             Session::flash('message', 'Deletion failed; user not found.');
             return redirect('deleteSearch')->with('page', $page);
         }
 
         $page->delete();
-echo "delete";
+
         # Finish
         Session::flash('message', 'Class was deleted.');
         return redirect('deleteClass')->with('page', $page);
     }
 
 
-# SEARCH USERNAME TO DELETE
+    # SEARCH USERNAME TO DELETE
     public function searchDelete(Request $request) {
 
+      if($_GET!=null){# need to find username list
 
-echo "searchDelete";
-dump($request->searchId);
-
-      if($_GET!=null){
         $page = Course::where('username', $request->searchId)->first();
         return view('deleteClass')->with('page', $page);
       }
       else {
+echo "else";
         $page = Course::where('username', $request->searchId)->first();
+        Session::flash('message', 'Username not found.');
         return view('deleteSearch')->with('page', $page);
 
 
       }
-
-
 
     }
 #{{$page->username}}

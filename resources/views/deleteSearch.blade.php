@@ -10,11 +10,11 @@
     {{csrf_field()}}
     <input type='hidden' name='searchId' value=''>
 
-    <h2>Delete Class</h2>
+    <h2>Class Delete Search</h2>
     <div class="panel-body">
       <div class="form-group">
-        <label for="username">Search Class to Delete</label>
-        <input type="text" class="form-control" id="search" name="searchId" placeholder="Username", value='Search' >
+        <label for="username"></label>
+        <input type="text" class="form-control" id="search" name="searchId" placeholder="Type username to find", value='' >
       </div>
       <br>
 

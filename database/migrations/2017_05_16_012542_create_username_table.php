@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Username;# uses Username model
 
-class CreateNewCourseTable extends Migration
+class CreateUsernameTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +14,12 @@ class CreateNewCourseTable extends Migration
      */
     public function up()
     {
-      Schema::create('courses', function (Blueprint $table) {
+      Schema::create('usernames', function (Blueprint $table) {
         # if name =  multiple words-> use one_two format
         $table->increments('id');
-        #$table->string('username');#this will be replaced with the new username table so is removed
-        $table->string('category');
-        $table->string('other')->nullable();
-        $table->text('description');
+        $table->string('username');
+        $table->string('first');
+        $table->string('last')->nullable();
         $table->timestamps();
 
         });
@@ -32,6 +32,6 @@ class CreateNewCourseTable extends Migration
      */
     public function down()
     {
-        Schema::drop('course');
+        Schema::drop('usernames');
     }
 }

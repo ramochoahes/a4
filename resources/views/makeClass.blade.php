@@ -51,7 +51,4 @@
   </ul>
 @endif
 
-{{dump($_GET)}}
-
-
 @endsection
