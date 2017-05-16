@@ -22,6 +22,7 @@ class ConnectUsernamesAndCourse extends Migration
       #$table->dropColumn('username'); # dropped it manually in migration
 
       # Creating a new INT field called `username_id` that has to be unsigned (i.e. positive)
+      # This column will replace the username column
       $table->integer('username_id')->unsigned()->nullable();
 
       # Making this field `username_id` is a foreign key that connects to the `id` field in the `usernames` table

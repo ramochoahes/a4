@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Course; #Imports Course Model
+use App\Course;#Imports Username Model
 
 class CourseTableSeeder extends Seeder
 {
@@ -14,20 +14,19 @@ class CourseTableSeeder extends Seeder
     public function run()
     {
 
-      # Array of author data to add
+      # Array of author data to add instead of JSON file
       $courses = [
-
-        ['Martial Arts', 'BJJ', 'Broly', 'other'],
-        ['Culinary', 'Baking', 'Vegeta', 'other'],
-        ['Golf', 'Putting', 'Goku', 'other'],
-        ['Other', 'Misc', 'Freeza', 'other']
-
+        ['Martial Arts', 'BJJ', 'Other'],
+        ['Golf', 'Putting', 'Other'],
+        ['Culinary', 'Baking', 'Other'],
+        ['Other', 'Other', 'Other']
       ];
 
-      # Initiate a new timestamp we can use for created_at/updated_at fields
-      $timestamp = Carbon\Carbon::now()->subDays(count($courses));
 
-      # Loop through each author, adding them to the database
+            # Initiate a new timestamp we can use for created_at/updated_at fields
+            $timestamp = Carbon\Carbon::now()->subDays(count($courses));
+
+            # Loop through each author, adding them to the database
       foreach($courses as $course) {
 
         # Set the created_at/updated_at for each book to be one day less than
@@ -37,10 +36,10 @@ class CourseTableSeeder extends Seeder
             'created_at' => $timestampForThisAuthor,
             'updated_at' => $timestampForThisAuthor,
             'category' => $course[0],
-            'description' => $course[[1],
+            'description' => $course[1],
             #'username' => $course[[2], no longer needed either
-            'username_id' => 1,
-            'other' => $course[3]
+            'username_id' => 1,# replaces username
+            'other' => $course[2],
 
         ]);
       }
