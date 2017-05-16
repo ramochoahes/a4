@@ -14,6 +14,7 @@ class CreateUsernameTable extends Migration
      */
     public function up()
     {
+
       Schema::create('usernames', function (Blueprint $table) {
         # if name =  multiple words-> use one_two format
         $table->increments('id');
@@ -33,5 +34,6 @@ class CreateUsernameTable extends Migration
     public function down()
     {
         Schema::drop('usernames');
+
     }
 }
