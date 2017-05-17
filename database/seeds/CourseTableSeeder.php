@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Course;#Imports Username Model
+use App\Course;#Imports Course Model
+use App\Username;#Imports Username Model
 
 class CourseTableSeeder extends Seeder
 {
@@ -22,12 +23,22 @@ class CourseTableSeeder extends Seeder
         ['Other', 'Other', 'Other']
       ];
 
+      # Load json file into PHP array
+      #$courses = json_decode(file_get_contents(database_path().'/courses.json'), True);
+      #$courses =array();
 
-            # Initiate a new timestamp we can use for created_at/updated_at fields
-            $timestamp = Carbon\Carbon::now()->subDays(count($courses));
+      # Initiate a new timestamp we can use for created_at/updated_at fields
+      $timestamp = Carbon\Carbon::now()->subDays(count($courses));
 
-            # Loop through each author, adding them to the database
+      # Loop through each author, adding them to the database
       foreach($courses as $course) {
+      # arr as $key => $value, get the username for the course from the array $courses.
+      #foreach($courses as $key => $course) {
+
+        # Find that author in the authors table
+        #$username_id = Username::where('username'->pluck('id')->first();
+
+
 
         # Set the created_at/updated_at for each book to be one day less than
         # the book before. That way each book will have unique timestamps.

@@ -42,7 +42,7 @@ class ConnectUsernamesAndCourse extends Migration
       Schema::table('courses', function (Blueprint $table) {
 
       # ref: http://laravel.com/docs/migrations#dropping-indexes
-      # combine tablename + fk field name + the word "foreign"
+      # to drop foreign key, combine tablename + fk field name + the word "foreign". this must be done before dropping the column
       $table->dropForeign('courses_username_id_foreign');
 
       $table->dropColumn('username_id');
