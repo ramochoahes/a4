@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
 
-/
-
     public function username() {
 		# Book belongs to Author
 		# Define an inverse one-to-many relationship.
