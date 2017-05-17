@@ -18,7 +18,7 @@ class CreateNewCourseTable extends Migration
         $table->increments('id');
         # This will be replaced with the new username table so is removed
         $table->string('category');
-        #$table->string('username');
+        $table->string('username')->nullable();
         $table->string('other')->nullable();
         $table->text('description');
         $table->timestamps();
@@ -33,6 +33,6 @@ class CreateNewCourseTable extends Migration
      */
     public function down()
     {
-        Schema::drop('course');
+        Schema::drop('courses');
     }
 }
