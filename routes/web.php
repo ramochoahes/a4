@@ -44,3 +44,17 @@ Route::get('/debug', function() {
         running on your production server, making your credentials public.
         */
  //print_r(config('database.connections.mysql'));
+
+ echo '<h1>Test Database Connection</h1>';
+ try {
+  $results = DB::select('SHOW DATABASES;');
+  echo '<strong style="background-color:green; padding:5px;">Connection confirmed</strong>';
+  echo "<br><br>Your Databases:<br><br>";
+  print_r($results);
+ }
+ catch (Exception $e) {
+  echo '<strong style="background-color:crimson; padding:5px;">Caught exception: ', $e->getMessage(), "</strong>\n";
+ }
+
+ echo '</pre>';
+ }
