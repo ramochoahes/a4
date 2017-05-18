@@ -16,7 +16,7 @@ class CreateNewCourseTable extends Migration
       Schema::create('courses', function (Blueprint $table) {
         # if name =  multiple words-> use one_two format
         $table->increments('id');
-        # This will be replaced with the new username table so is removed
+        # username_id created in later migration
         $table->string('category');
         $table->string('username')->nullable();
         $table->string('other')->nullable();

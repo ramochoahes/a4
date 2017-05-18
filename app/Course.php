@@ -8,18 +8,15 @@ class Course extends Model
 {
 
     public function username() {
-		# Book belongs to Author
+		# Course has one username
 		# Define an inverse one-to-many relationship.
-		return $this->belongsTo('App\Username');
+		return $this->belongsToMany('Username::class');
 	}
 
-/*
-    public function user() {
-        return $this->belongsTo('App\User');
-    }
+  public function tags()
+  {
+      # With timetsamps() will ensure the pivot table has its created_at/updated_at fields automatically maintained
+      return $this->belongsToMany('App\Tag')->withTimestamps();
+  }
 
-    public function tags() {
-        return $this->belongsToMany('App\Tag')->withTimestamps();
-    }
-*/
 }

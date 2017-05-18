@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         #This goes first because the course table needs this to exist on its table
         $this->call(UsernamesTableSeeder::class);
         $this->call(CourseTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
+        $this->call(CourseTagTableSeeder::class);
     }
 }

@@ -10,9 +10,9 @@ class Username extends Model
 * Relationship method
 */
 public function usernames() {
-# Author has many Books
+# Username has many Courses
 # Define a one-to-many relationship.
-return $this->hasMany('App\Course');
+return $this->belongsToMany('Course::class');
 }
 /**
 *

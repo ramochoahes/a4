@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
@@ -96,7 +95,6 @@ class ModelController extends Controller {
       $page = Course::all()->first();# gets all data fro edit
       $test = DB::table('courses')->where('id', '>', 1)->value('username');
 
-
       if($page==null){
 
         Session::flash('message', "User not found.");
@@ -106,7 +104,12 @@ class ModelController extends Controller {
         ->withTest($test);
       }
       else{
+        $course = Course::where('category','=','Golf')->first();
 
+        dump($course->category.' is tagged with: ');
+        foreach($course->tags as $tag) {
+            dump($tag->name);
+        }
         return View('editClass')
         ->withPage($page)
         ->withTest($test);
@@ -203,5 +206,8 @@ echo "saveEditFunction";
 
     }
 
+    public function tagFeature() {
+
+    }
 
 }
