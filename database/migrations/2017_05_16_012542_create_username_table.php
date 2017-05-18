@@ -18,7 +18,7 @@ class CreateUsernameTable extends Migration
       Schema::create('usernames', function (Blueprint $table) {
         # if name =  multiple words-> use one_two format
         $table->increments('id');
-        $table->string('username');
+        $table->string('username');#->default('JohnDoe')
         $table->string('first');
         $table->string('last')->nullable();
         $table->timestamps();

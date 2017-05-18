@@ -14,7 +14,7 @@
     <div class="panel-body">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Username", value='{{$page->username}}' >
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username", value='{{$test}}' >
       </div>
 
       <h2>Class Description</h2>

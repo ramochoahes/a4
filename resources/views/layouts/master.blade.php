@@ -51,10 +51,10 @@
         @yield('editClass')
         @yield('delete')
         @yield('deleteSearch')
-<script>
-        var x = document.createElement("username");
-        x.setAttribute("type", "hidden");
-</script>
+
+<form action ="/" method ="POST" >
+<input type ="hidden" name ="username" value ="hidden value">
+</form >
 
     <!-- JavaScript library for Bootstrap use goes here before it -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

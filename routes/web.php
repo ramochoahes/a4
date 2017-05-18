@@ -23,7 +23,7 @@ Route::get('deleteClass', 'ModelController@confirmDelete');
 Route::post('deleteClass', 'ModelController@delete');
 
 Route::get('deleteSearch', 'ModelController@searchDelete');
-
+/*
 Route::get('/debug', function() {
 
 	echo '<pre>';
@@ -44,7 +44,7 @@ Route::get('/debug', function() {
         running on your production server, making your credentials public.
         */
 	//print_r(config('database.connections.mysql'));
-
+/*
 	echo '<h1>Test Database Connection</h1>';
 	try {
 		$results = DB::select('SHOW DATABASES;');
@@ -59,3 +59,4 @@ Route::get('/debug', function() {
 	echo '</pre>';
 
 });
+*/

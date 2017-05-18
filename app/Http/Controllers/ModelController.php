@@ -9,10 +9,11 @@ use Illuminate\Support\MessageBag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
+use App\Username;
 use App\Course; # makes Class model accessible to controller functions below
 use Session;# allows sessions
 use App\Tag;
-
+use DB;
 
 
 class ModelController extends Controller {
@@ -65,6 +66,10 @@ class ModelController extends Controller {
         }
         # NO DATA, CREATE NEW
         else{
+          # data from ValController was not saved with either metho, Auth needed
+          #$title = Input::get('username');
+          #$title = $request-> input('username');
+          #dump($title);
 
           $course = new Course(); #not a collection
           return view('makeClass')
@@ -87,21 +92,25 @@ class ModelController extends Controller {
     # GETs (gets data to edit)
 
     public function editFunction(Request $request) {
-      #$page = $request->input('username');
-      #$allData = Course::all()->username;
-      $page = Course::all()->first();# We need this here to work
-      #$page = Course::where('username', $id)->first();
 
-      if(is_null($page)){
+      $page = Course::all()->first();# gets all data fro edit
+      #$test = DB::table('courses')->where('id', '>', 1)->value('username');
+
+
+      if($page==null){
 
         Session::flash('message', "User not found.");
         #return "page is null"; # nowhere to return to
         return View('editClass')
         ->withPage($page);
       }
+      else{
 
-      return View('editClass')
-      ->withPage($page);
+        return View('editClass')
+        ->withPage($page);
+      }
+
+
     }
 
     # SAVE EDIT
@@ -141,10 +150,9 @@ echo "saveEditFunction";
         if(!$page) {
 
             Session::flash('message', 'Username deleted.');
-            return view('makeClass');
+            return view('deleteSearch');
         }
 
-echo "confirmDelete";
         return view('deleteClass')->with('page', $page);
     }
 
@@ -173,25 +181,25 @@ echo "confirmDelete";
 
     # SEARCH USERNAME TO DELETE
     public function searchDelete(Request $request) {
-
-      if($_GET!=null){# need to find username list
+      $test=DB::table('courses')->where('id', '>', 6)->value('username');
+      dump($test);
+      #dump($_GET['searchId']);
+      dump($request->searchId);
+      if(($_GET!=null)&&($_GET['searchId']==$test)){# need to find username list
 
         $page = Course::where('username', $request->searchId)->first();
         return view('deleteClass')->with('page', $page);
       }
       else {
-echo "else";
+
         $page = Course::where('username', $request->searchId)->first();
-        Session::flash('message', 'Username not found.');
+        Session::flash('message', 'Username not found. Search Again.');
         return view('deleteSearch')->with('page', $page);
 
 
       }
 
     }
-#{{$page->username}}
-#placeholder='{{$username}}' value='{{$username}}'
-# {{$category}}
 
 
 }
