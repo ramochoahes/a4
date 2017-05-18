@@ -94,7 +94,7 @@ class ModelController extends Controller {
     public function editFunction(Request $request) {
 
       $page = Course::all()->first();# gets all data fro edit
-      #$test = DB::table('courses')->where('id', '>', 1)->value('username');
+      $test = DB::table('courses')->where('id', '>', 1)->value('username');
 
 
       if($page==null){
@@ -102,12 +102,14 @@ class ModelController extends Controller {
         Session::flash('message', "User not found.");
         #return "page is null"; # nowhere to return to
         return View('editClass')
-        ->withPage($page);
+        ->withPage($page)
+        ->withTest($test);
       }
       else{
 
         return View('editClass')
-        ->withPage($page);
+        ->withPage($page)
+        ->withTest($test);
       }
 
 
