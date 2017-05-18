@@ -184,9 +184,9 @@ echo "saveEditFunction";
     # SEARCH USERNAME TO DELETE
     public function searchDelete(Request $request) {
       $test=DB::table('courses')->where('id', '>', 6)->value('username');
-      dump($test);
+      #dump($test);
       #dump($_GET['searchId']);
-      dump($request->searchId);
+      #dump($request->searchId);
       if(($_GET!=null)&&($_GET['searchId']==$test)){# need to find username list
 
         $page = Course::where('username', $request->searchId)->first();
